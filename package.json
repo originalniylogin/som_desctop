@@ -1,0 +1,12 @@
+{
+  "name": "som-desctop",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "es6-fs": "^1.1.0"
+  }
+}
