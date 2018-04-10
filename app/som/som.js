@@ -5,7 +5,7 @@ class SOM {
   constructor(trainingSamples, dim) {
     this.neurons = trainingSamples.map((elem) => ({
       weight: elem.val, 
-      cluster: new Cluster(4)
+      cluster: new Cluster(dim)
     }));
 
     for (let i = 0; i < trainingSamples.length/3*2; ++i)

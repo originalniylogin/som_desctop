@@ -38,18 +38,11 @@ app.on('activate', () => {
   }
 });
 
-const irises = readData('iris.txt');
-const som = new SOM(irises);
-const clusters = som.clusters(irises);
+// Console Output
+
+const data = readData('dataset.txt', false);
+const som = new SOM(data, 2);
+const clusters = som.clusters(data);
+
 clusters.forEach((cluster) => cluster.print());
-/*
-const fs = require('es6-fs');
-fs.readFile(`${__dirname}/${filename = 'iris.txt'}`)
-    .then(contests => {
-      const lines = contests.toString('utf8').split('\n');
-      lines.forEach(line => {
-        console.log(line.split('\t'));
-      })
-    })
-    .catch(err => console.error(err));
-*/
+console.log(`clusters count: ${clusters.length}`);

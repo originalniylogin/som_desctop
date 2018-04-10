@@ -18,7 +18,7 @@ const readData = function (fileName, hasType = true) {
 
   const contests = fs.readFileSync(`${__dirname}/${fileName}`, { encoding: 'utf8' });
   contests.split(/\r\n|\r|\n/).forEach((line) => {
-    line = line.split('\t');
+    line = line.match(/\d+/g);
     const type = hasType ? parseInt(line.shift()) : null;
     const elem = line.map((x) => parseFloat(x));
 
