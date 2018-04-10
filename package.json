@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "electron": "^1.8.4",
-    "es6-fs": "^1.1.0"
+    "lodash": "^4.17.5"
   }
 }

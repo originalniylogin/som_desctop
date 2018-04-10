@@ -2,6 +2,7 @@ const    { app, BrowserWindow } = require('electron');
 const                      path = require('path');
 const                       url = require('url');
 const { ClusterElem, readData } = require('./app/som/cluster-elem');
+const                       SOM = require('./app/som/som');
 
 let mainWindow = null;
 
@@ -38,7 +39,9 @@ app.on('activate', () => {
 });
 
 const irises = readData('iris.txt');
-irises.forEach(iris => iris.printConsole());
+const som = new SOM(irises);
+const clusters = som.clusters(irises);
+clusters.forEach((cluster) => cluster.print());
 /*
 const fs = require('es6-fs');
 fs.readFile(`${__dirname}/${filename = 'iris.txt'}`)

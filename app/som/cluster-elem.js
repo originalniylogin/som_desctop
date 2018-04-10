@@ -1,36 +1,31 @@
 'use strict';
 
-const fs = require('es6-fs');
+const fs = require('fs');
 
 class ClusterElem {
-  constructor(data, type) {
-    this.data = data;
+  constructor(val, type) {
+    this.val = val;
     this.type = type;
   }
 
-  printConsole() {
-    console.log(`type: ${this.type}, data: ${this.data}`);
+  print() {
+    console.log(`type: ${this.type}, value: ${this.val}`);
   }
 }
 
-const readData = function (fileName, dim, hasType = true) {
+const readData = function (fileName, hasType = true) {
   let data = [];
 
-  fs.readFile(`${__dirname}/${fileName}`)
-    .then(contests => {
-      const lines = contests.toString('utf8').split('\n');
-      lines.forEach(line => {
-        line = line.split('\t');
-        const type = hasType ? parseInt(line.shift()) : null;
-        const elem = line.map(x => parseFloat(x));
+  const contests = fs.readFileSync(`${__dirname}/${fileName}`, { encoding: 'utf8' });
+  contests.split(/\r\n|\r|\n/).forEach((line) => {
+    line = line.split('\t');
+    const type = hasType ? parseInt(line.shift()) : null;
+    const elem = line.map((x) => parseFloat(x));
 
-        const clusterElem = new ClusterElem(elem, type);
-        data.push(clusterElem);
-      });
-    })
-    .catch(err => console.error(err));
-    console.log(data);
-    return data;
+    data.push(new ClusterElem(elem, type));
+  })
+
+  return data;
 };
 
 module.exports = { ClusterElem, readData };
