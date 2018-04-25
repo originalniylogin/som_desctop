@@ -20,8 +20,8 @@ class Cluster {
     this.elems.push(clusterElem);
   }
 
-  radius() {
-    return 2.6 * _.sumBy(this.elems, (clusterElem) => {
+  radius(alpha) {
+    return alpha * _.sumBy(this.elems, (clusterElem) => {
       return Cluster.euclidianDistanse(this.center, clusterElem.val);
     }) / this.elems.length;
   }

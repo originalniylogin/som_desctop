@@ -4,10 +4,33 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  
+  <body style="overflow-x: hidden; overflow-y: hidden;">
+    <ph-window>
+        <tool-bar type="header">
+            <h1 class="title" style="-webkit-app-region: drag;">SOM</h1>
+            <div class="toolbar-actions" style="text-align: center;">
+              <button class="btn btn-default pull-left choose-dataset">Choose Dataset</button>
+              <button class="btn btn-default pull-left clustering">Do Clustering</button>
+              <input class="pull-left alpha" type="text" placeholder="Alpha">
+              <button class="btn btn-default pull-left save">Save</button>
+              <button class="btn btn-system pull-right close">Close</button>
+              <button class="btn btn-system pull-right minimize">Minimize</button>
+            </div>
+          </tool-bar>
+
+      <window-content>
+        <div>
+          <content-frame class="pull-left" style="width: 800px; height: 800px;">
+            <div id="container", style="position: absolute; width: 800px; height: 800px;">
+            </div>
+          </content-frame>
+        </div>
+      </window-content>
+    </ph-window>
+
+    <canvas id="canvas"></canvas>
+    <script src="graphics.min.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

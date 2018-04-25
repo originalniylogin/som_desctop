@@ -2,11 +2,12 @@ const       _ = require('lodash');
 const Cluster = require('./cluster');
 
 class SOM {
-  constructor(trainingSamples, dim) {
+  constructor(trainingSamples, dim, alpha) {
     this.neurons = trainingSamples.map((elem) => ({
       weight: elem.val, 
       cluster: new Cluster(dim)
     }));
+    this.alpha = alpha
 
     for (let i = 0; i < trainingSamples.length/3*2; ++i)
       this.neurons.splice(Math.floor(Math.random() * this.neurons.length), 1);
@@ -42,7 +43,7 @@ class SOM {
 
   _uniteNeurons(neuronToUnite) {
     let wereUniouns = false;
-    let radius = neuronToUnite.cluster.radius();
+    let radius = neuronToUnite.cluster.radius(this.alpha);
 
     this.neurons = this.neurons.filter((neuron) => {
       if (
@@ -50,7 +51,7 @@ class SOM {
         && Cluster.euclidianDistanse(neuron.cluster.center, neuronToUnite.cluster.center) < radius
       ) {
         neuron.cluster.elems.forEach((elem) => neuronToUnite.cluster.addElem(elem));
-        radius = neuronToUnite.cluster.radius();
+        radius = neuronToUnite.cluster.radius(this.alpha);
         return false;
       } else {
         return true;
